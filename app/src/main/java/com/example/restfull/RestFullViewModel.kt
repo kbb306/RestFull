@@ -1,7 +1,8 @@
 package com.example.restfull
+import androidx.lifecycle.ViewModel
+class RestFullViewModel : ViewModel() {
+    private val uutau = restfull.Watcher()
 
-class RestFullViewModel {
-    // Define model instance here once we figure out how TF it works
     fun setPercent(per : Int) {
 
     }

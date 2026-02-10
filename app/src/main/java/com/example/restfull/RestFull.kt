@@ -3,14 +3,21 @@ package com.example.restfull
 class Watcher {
     var default = Alarm(100,"default")
     var Alarms = mutableListOf(default)
+
+    fun getAlarm(i : Int): Alarm {
+        return Alarms[i]
+    }
 }
 
-class Alarm(var threshold : Int,var name : String) {
+class Alarm(var initthreshold : Int,var initname : String) {
+
     init {
-        require(threshold in 1..<100)
-        this.threshold = threshold
-        this.name = name
+        require(initthreshold in 1..<100)
     }
+    var threshold = initthreshold
+    var name = initname
+
+
 
 
 }

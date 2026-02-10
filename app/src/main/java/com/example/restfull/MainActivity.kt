@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         binding.filler.setOnSeekBarChangeListener { view : View ->
-            viewModel.
+
         }
 
     }
