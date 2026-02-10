@@ -24,11 +24,13 @@
         android:orientation="horizontal"
         android:weightSum=".25">
             <EditText
+                android:id="@+id/custompercent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".125"
                 android:inputType="number"/>
             <Spinner
+                android:id="@+id/customsound"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".125"/>
@@ -39,6 +41,7 @@
         android:weightSum=".25">
 
         <SeekBar
+            android:id="@+id/customvolume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".25"/>
@@ -49,6 +52,7 @@
         android:weightSum=".25">
 
         <Button
+            android:id="@+id/finishbutton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
