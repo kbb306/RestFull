@@ -1,11 +1,11 @@
 package com.example.restfull
 
-class Alarm(name : String, threshold: Int, sound : String) {
+class Alarm(Name : String, threshold: Int, sound : String) {
     init {
         require(threshold > 0 && threshold >= 100)
-        require(!name.equals(""))
+        require(!Name.equals(""))
     }
-    var Name = name
+    var name = Name
         set(value) {
             when {
                 value.equals("") -> {
