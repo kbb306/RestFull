@@ -2,4 +2,6 @@
     <string name="app_name">RestFull</string>
     <string name="percent">%</string>
     <string name="plus">+</string>
+    <string name="additional_alarms">Additional Alarms</string>
+    <string name="additional_alarms">Additional Alarms</string>
 </resources>
