@@ -11,6 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestFull">
+        <service
+            android:name=".service.BatteryAlarmService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
+
+        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
