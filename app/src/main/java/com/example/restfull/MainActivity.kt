@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val recycler = binding.scratchpad
         binding.filler.setOnSeekBarChangeListener { view : View ->
 
         }
