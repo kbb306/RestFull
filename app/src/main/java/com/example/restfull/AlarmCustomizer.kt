@@ -26,7 +26,7 @@ class AlarmCustomizer : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.custompercent.doAfterTextChanged { text ->
-
+            // Call to alarm thing here?
         }
     }
 }
