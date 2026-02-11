@@ -1,8 +1,12 @@
 package com.example.restfull
 import androidx.lifecycle.ViewModel
+import android.net.Uri
+import androidx.lifecycle.MutableLiveData
+
 class RestFullViewModel : ViewModel() {
-    val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,"Bells",75, true))
-    fun add(threshold : Int, name : String, sound : String, volume : Int, on : Boolean)  {
+    val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,null,75, true))
+    val soundList = MutableLiveData<List<Tone>>()
+    fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {
         val x : Alarm  = Alarm(name,threshold,sound,volume, on)
         alarmList.add(x)
     }
@@ -11,12 +15,12 @@ class RestFullViewModel : ViewModel() {
         alarmList[pos].threshold = percent
     }
 
-    fun onoff(pos : Int,) {
+    fun onoff(pos : Int) {
         alarmList[pos].on = !(alarmList[pos].on)!!
     }
 
-    fun popSpin() {
-        TODO("Implement spinner populator")
+    fun sound(pos: Int, sound: Uri) {
+        alarmList[pos].sound = sound
     }
 
     fun volume(pos : Int, vol : Int) {
