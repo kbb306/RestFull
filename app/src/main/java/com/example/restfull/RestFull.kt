@@ -12,7 +12,7 @@ class Alarm {
         this.sound = sound
     }
 
-    fun check() : String? {
+    fun check() : String? { // Consider moving to Viewmodel?
         var batt : Int = TODO("API Call here")
         return when {
             this.threshold!! >= batt -> this.sound
