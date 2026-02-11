@@ -7,9 +7,20 @@ class RestFullViewModel : ViewModel() {
         alarmList.add(x)
     }
 
+    fun percent(pos : Int, percent : Int) {
+        alarmList[pos].threshold = percent
+    }
+
     fun onoff(pos : Int,) {
         alarmList[pos].on = !(alarmList[pos].on)!!
     }
 
+    fun popSpin() {
+        TODO("Implement spinner populator")
+    }
+
+    fun volume(pos : Int, vol : Int) {
+        alarmList[pos].volume = vol
+    }
 
 }
