@@ -31,7 +31,7 @@
             </ImageView>
         <SeekBar
             android:id="@+id/filler"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="209dp"
             android:layout_height="match_parent" />
         <LinearLayout
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/percent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
         </LinearLayout>
 
         <Switch
@@ -61,11 +61,14 @@
 
     </LinearLayout>
 
-
-
     <Spinner
         android:id="@+id/soundspinner"
         android:layout_width="209dp"
+        android:layout_height="wrap_content" />
+
+    <SeekBar
+        android:id="@+id/volBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.google.android.material.button.MaterialButton
@@ -77,7 +80,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/plus"
-        android:textSize="25dp"
+        android:textSize="25sp"
         />
     <LinearLayout
         android:id="@+id/scratchpad"

@@ -31,7 +31,7 @@
         </ImageView>
         <SeekBar
             android:id="@+id/filler"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="209dp"
             android:layout_height="match_parent" />
         <LinearLayout
@@ -66,6 +66,11 @@
     <Spinner
         android:id="@+id/soundspinner"
         android:layout_width="209dp"
+        android:layout_height="wrap_content" />
+
+    <SeekBar
+        android:id="@+id/volBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.google.android.material.button.MaterialButton
