@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val recycler = binding.scratchpad
-        val soundObject = Sounds(this)
-        val soundList = soundObject.getSounds()
-        viewModel.soundList = soundList as MutableList<Tone>
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,

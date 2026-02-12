@@ -1,13 +1,16 @@
 package com.example.restfull
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.map
 
-class RestFullViewModel : ViewModel() {
+class RestFullViewModel(application: Application) : AndroidViewModel(application) {
     val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,null,75, true))
-    var soundList = mutableListOf<Tone>()
+    val soundObject = Sounds(application.applicationContext)
+    val soundList = soundObject.getSounds()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {
         val x : Alarm  = Alarm(name,threshold,sound,volume, on)
         alarmList.add(x)
@@ -28,6 +31,9 @@ class RestFullViewModel : ViewModel() {
     fun volume(pos : Int, vol : Int) {
         alarmList[pos].volume = vol
     }
+
+
+
 
 
 
