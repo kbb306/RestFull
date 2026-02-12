@@ -9,6 +9,8 @@ import androidx.lifecycle.map
 
 class RestFullViewModel(application: Application) : AndroidViewModel(application) {
     val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,null,75, true))
+    val batt = BatteryListener(application.applicationContext)
+    //val service = BatteryAlarmService()
     val soundObject = Sounds(application.applicationContext)
     val soundList = soundObject.getSounds()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {

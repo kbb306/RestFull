@@ -5,19 +5,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-// Todo Convert to viewBinding
 class Adapter(private val alarmList: List<Alarm>) :
     RecyclerView.Adapter<Adapter.Viewholder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.Viewholder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.alarm_card,
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.alarm_card,
             parent,false)
             return Viewholder(view)
         }
 
-    override fun onBindViewHolder(holder: Adapter.Viewholder, position: Int) {
+    override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val alarmItem = alarmList[position]
-        holder.alarmName.text = alarm.name
-        holder.alarmPercent.text = alarm.threshold.toString()
+        holder.alarmName.text = alarmItem.name
+        holder.alarmPercent.text = alarmItem.threshold.toString()
 
     }
 

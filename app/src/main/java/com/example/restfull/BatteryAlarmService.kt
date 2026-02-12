@@ -10,7 +10,7 @@ import android.app.NotificationManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-class MyService: Service() {
+class BatteryAlarmService: Service() {
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
