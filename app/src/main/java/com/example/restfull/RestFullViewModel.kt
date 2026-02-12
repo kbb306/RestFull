@@ -7,7 +7,7 @@ import androidx.lifecycle.map
 
 class RestFullViewModel : ViewModel() {
     val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,null,75, true))
-    val soundList = mutableListOf<Tone>()
+    var soundList = mutableListOf<Tone>()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {
         val x : Alarm  = Alarm(name,threshold,sound,volume, on)
         alarmList.add(x)

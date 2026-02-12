@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val recycler = binding.scratchpad
         val soundObject = Sounds(this)
         val soundList = soundObject.getSounds()
+        viewModel.soundList = soundList as MutableList<Tone>
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
             binding.soundspinner.adapter = adapter
 
-        // Spinner binding
+// Spinner binding
         binding.soundspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
