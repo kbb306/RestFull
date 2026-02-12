@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val recycler = binding.scratchpad
         val soundObject = Sounds(this)
         val soundList = soundObject.getSounds()
-        viewModel.soundList.value = soundList
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,
@@ -37,13 +36,12 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
-        // Code for populating and binding soundspinner. There must be a more MVVM way to do this!
-        viewModel.soundList.observe(this) { tones ->
-            val titles = tones.map { it.title }
+        // Spinner population
+            val titles = viewModel.genTitles()
             val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
             binding.soundspinner.adapter = adapter
-        }
 
+        // Spinner binding
         binding.soundspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -51,8 +49,8 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val picked = viewModel.soundList.value?.get(position)
-                viewModel.sound(0, picked?.uri ?:soundObject.getDef().uri )
+                val picked = viewModel.soundList[position]
+                viewModel.sound(0, picked.uri)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
