@@ -15,13 +15,14 @@ class BatteryListener(context : Context) {
     val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
     val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
     @RequiresApi(Build.VERSION_CODES.P)
-    val fullTime: Long = battMan.computeChargeTimeRemaining()/60000 //May not autoupdate
     var per : Int? = 0
+        @RequiresApi(Build.VERSION_CODES.P)
         set(value) {
             field = when {
                 level == -1 || scale == -1 -> null
                 else -> level/scale * 100
             }
+
         }
 
 }

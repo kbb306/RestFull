@@ -12,8 +12,6 @@ import com.example.restfullsimple.BatteryListener
 
 class RestFullViewModel(application: Application) : AndroidViewModel(application) {
     val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,100,null, true))
-    val batt = BatteryListener(application.applicationContext)
-    val hax = AlarmSpawner(application.applicationContext)
     val soundObject = Sounds(application.applicationContext)
     val soundList = soundObject.getSounds()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {

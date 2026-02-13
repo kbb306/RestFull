@@ -11,11 +11,14 @@ import android.widget.SeekBar
 import com.example.restfull.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import android.text.Editable
+import com.example.restfullsimple.BatteryListener
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel : RestFullViewModel by viewModels()
+    private val batt = BatteryListener(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
