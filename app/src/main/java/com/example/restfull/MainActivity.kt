@@ -1,5 +1,7 @@
 package com.example.restfull
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -32,9 +34,19 @@ class MainActivity : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                val percent = 100/(filler.max -progress)
+                val percent = when{
+                    progress >= filler.max -> 100/1
+                    else -> 100/(filler.max -progress)
+                        }
                 viewModel.percent(0,percent)
                 percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
+                val color = when {
+                    progress <= 1 -> Color.RED
+                    progress <= 2 -> Color.YELLOW
+                    else -> Color.GREEN
+                }
+                val fore = ((seekBar?.progressDrawable ?: return  ) as LayerDrawable).findDrawableByLayerId(android.R.id.progress)
+                fore.setTint(color)
 
             }
 
