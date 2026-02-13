@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import com.example.restfull.databinding.ActivityMainBinding
 import androidx.activity.viewModels
-
+import android.text.Editable
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                viewModel
+                viewModel.percent(0,progress
+                )
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -40,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
+
+        binding.percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
+
+
         // Spinner population
             val titles = viewModel.genTitles()
             val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)

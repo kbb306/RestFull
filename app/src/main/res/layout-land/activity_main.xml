@@ -43,13 +43,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:inputType="number"
+                android:autofillHints="@+strings/percenthint"
+
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/percent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
         </LinearLayout>
 
         <Switch
@@ -81,7 +83,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/plus"
-        android:textSize="25dp"
+        android:textSize="25sp"
         />
 
     <LinearLayout

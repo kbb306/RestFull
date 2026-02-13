@@ -37,7 +37,9 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-
+    fun display(pos :Int): String {
+        return alarmList[pos].threshold.toString()
+    }
 
 
 
