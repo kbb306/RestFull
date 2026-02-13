@@ -29,7 +29,7 @@
             android:id="@+id/filler"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="209dp"
-            android:layout_height="match_parent" android:max="1"
+            android:layout_height="match_parent" android:max="5"
             android:progressDrawable="@+/drawable/batterymeter"
             android:splitTrack="false"/>
         <LinearLayout
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/percent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
         </LinearLayout>
 
         <Switch
