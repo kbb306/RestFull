@@ -1,4 +1,5 @@
 package com.example.restfull
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -19,6 +20,11 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val recycler = binding.scratchpad
+        //This might allow my original service code to run after all
+        val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
+            putExtra("alarmlist", ArrayList(viewModel.alarmList))
+        }
+        //startService(alarmIntent)
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,

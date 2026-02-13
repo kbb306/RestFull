@@ -4,17 +4,19 @@ import androidx.lifecycle.ViewModel
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.map
+import com.example.restfullsimple.BatteryListener
 
 class RestFullViewModel(application: Application) : AndroidViewModel(application) {
-    val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,null,75, true))
+    val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,100,null, true))
     val batt = BatteryListener(application.applicationContext)
-    //val service = BatteryAlarmService()
+
     val soundObject = Sounds(application.applicationContext)
     val soundList = soundObject.getSounds()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {
-        val x : Alarm  = Alarm(name,threshold,sound,volume, on)
+        val x : Alarm  = Alarm(name,threshold,volume,sound,on)
         alarmList.add(x)
     }
 
