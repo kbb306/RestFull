@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         val recycler = binding.scratchpad
 
-        binding.percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display())
+        binding.percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
 
 
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
