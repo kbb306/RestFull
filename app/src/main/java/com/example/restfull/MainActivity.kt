@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 fromUser: Boolean
             ) {
                 val percent = when{
+                    progress <= 0 -> 0
                     progress >= filler.max -> 100/1
                     else -> 100/(filler.max -progress)
                 }
