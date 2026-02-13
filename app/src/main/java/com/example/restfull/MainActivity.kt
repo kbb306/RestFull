@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
             putExtra("alarmlist", ArrayList(viewModel.alarmList))
         }
-        //startService(alarmIntent)
+        startService(alarmIntent)
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,

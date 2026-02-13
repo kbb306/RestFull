@@ -35,7 +35,7 @@ class BatteryAlarmService(): Service() {
         }
         Log.d("Service Status","Starting Service")
         val alarmList = mutableListOf(intent?.getParcelableArrayListExtra<Alarm>("alarmlist"))
-        for (alarm :  in alarmList) {
+        for (alarm in alarmList) {
             when {
                 alarm.on ->
             }
