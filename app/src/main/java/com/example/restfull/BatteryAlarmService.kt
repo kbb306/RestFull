@@ -40,24 +40,13 @@ class BatteryAlarmService(context: Context): Service() {
         }
         Log.d("Service Status","Starting Service")
         val alarmList = mutableListOf(intent?.getParcelableArrayListExtra<Alarm>("alarmlist"))
-        val alarmlist = alarmList[0]
-        if (alarmlist != null) {
-            while (battman.per?.plus(1) != 101) { //This is most likely catastrophically bad and unnecessary
-                for (alarm in alarmlist) {
-                    when {
-                        alarm.on -> {
-                            if (battman.per == alarm.threshold) {
-                                //Call alarm (probably needs notification)
-                            }
-
-                        }
-
-                        else -> continue
-                    }
-
-                }
-            }
+        if (!battman.isCharging) {
+            Toast.makeText(
+                applicationContext, "Cannot be used while battery is not charging",
+                Toast.LENGTH_LONG
+            ).show()
         }
+        val alarmlist = alarmList[0]
 
         stopSelf()
         return START_STICKY
