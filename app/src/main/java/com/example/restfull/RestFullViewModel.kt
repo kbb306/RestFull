@@ -38,7 +38,7 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun display (pos: Int) : String {
-        val string = alarmList[pos].threshold.toString()
+        val string : String = alarmList[pos].threshold.toString()
         return string
     }
 
@@ -47,9 +47,7 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-    fun display(pos :Int): String {
-        return alarmList[pos].threshold.toString()
-    }
+
 
 
 
