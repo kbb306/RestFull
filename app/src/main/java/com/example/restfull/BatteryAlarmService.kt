@@ -45,6 +45,7 @@ class BatteryAlarmService(context: Context): Service() {
                 applicationContext, "Cannot be used while battery is not charging",
                 Toast.LENGTH_LONG
             ).show()
+            stopSelf()
         }
         val alarmlist = alarmList[0]
 
