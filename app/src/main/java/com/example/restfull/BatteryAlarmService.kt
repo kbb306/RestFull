@@ -39,7 +39,6 @@ class BatteryAlarmService(context: Context): Service() {
             Log.d("Service Name",name)
         }
         Log.d("Service Status","Starting Service")
-        val alarmList = mutableListOf(intent?.getParcelableArrayListExtra<Alarm>("alarmlist"))
         if (!battman.isCharging) {
             Toast.makeText(
                 applicationContext, "Cannot be used while battery is not charging",
@@ -47,8 +46,9 @@ class BatteryAlarmService(context: Context): Service() {
             ).show()
             stopSelf()
         }
+        val alarmList = mutableListOf(intent?.getParcelableArrayListExtra<Alarm>("alarmlist"))
         val alarmlist = alarmList[0]
-
+        // Logic here?
         stopSelf()
         return START_STICKY
     }
