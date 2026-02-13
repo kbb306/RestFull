@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class Adapter(private val alarmList: List<Alarm>) :
     RecyclerView.Adapter<Adapter.Viewholder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-    val view = LayoutInflater.from(parent.context).inflate(R.layout.alarm_card, parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder { val view = LayoutInflater.from(parent.context).inflate(R.layout.alarm_card, parent,false)
         return Viewholder(view)
         }
 
