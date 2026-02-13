@@ -1,5 +1,6 @@
 package com.example.restfull
 import android.app.Application
+import android.app.PendingIntent
 import androidx.lifecycle.ViewModel
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +13,7 @@ import com.example.restfullsimple.BatteryListener
 class RestFullViewModel(application: Application) : AndroidViewModel(application) {
     val alarmList: MutableList<Alarm> = arrayListOf(Alarm("Default",100,100,null, true))
     val batt = BatteryListener(application.applicationContext)
-
+    val hax = AlarmSpawner(application.applicationContext)
     val soundObject = Sounds(application.applicationContext)
     val soundList = soundObject.getSounds()
     fun add(threshold : Int, name : String, sound : Uri, volume : Int, on : Boolean)  {
@@ -25,7 +26,7 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun onoff(pos : Int) {
-        alarmList[pos].on = !(alarmList[pos].on)!!
+        alarmList[pos].on = !(alarmList[pos].on)
     }
 
     fun sound(pos: Int, sound: Uri) {
@@ -34,6 +35,15 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
 
     fun volume(pos : Int, vol : Int) {
         alarmList[pos].volume = vol
+    }
+
+    fun display (pos: Int) : String {
+        val string = alarmList[pos].threshold.toString()
+        return string
+    }
+
+    fun setRepeat() {
+        val toRedo = Intent()
     }
 
 
