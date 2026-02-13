@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                viewModel
+                viewModel.percent(0,100/progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
