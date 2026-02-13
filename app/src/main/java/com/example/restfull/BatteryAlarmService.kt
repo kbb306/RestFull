@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat
 import com.example.restfullsimple.BatteryListener
 
 class BatteryAlarmService(context: Context): Service() {
-    private val battman = BatteryListener(this)
+    private val battman = BatteryListener(this) // Does this need application context?
     private var loop = true
     override fun onBind(p0: Intent?): IBinder? {
         return null
