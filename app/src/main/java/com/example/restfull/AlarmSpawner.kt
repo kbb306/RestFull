@@ -10,7 +10,7 @@ class AlarmSpawner(val context: Context) {
         val cal = Calendar.getInstance()
         val timeToTarget = (alarm.threshold.minus(per).div((1-per)).times(fullTime)).toInt()
 
-                cal.add(Calendar.MINUTE, timeToTarget)
+        cal.add(Calendar.MINUTE, timeToTarget)
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                     putExtra(AlarmClock.EXTRA_HOUR, cal.get(Calendar.HOUR_OF_DAY))
                     putExtra(AlarmClock.EXTRA_MINUTES, cal.get(Calendar.MINUTE))

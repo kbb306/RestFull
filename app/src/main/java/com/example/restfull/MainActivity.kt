@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import com.example.restfull.databinding.ActivityMainBinding
 import androidx.activity.viewModels
+import android.text.Editable
 
 
 
@@ -20,11 +21,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val recycler = binding.scratchpad
-        //This might allow my original service code to run after all
-        val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
-            putExtra("alarmlist", ArrayList(viewModel.alarmList))
-        }
-        //startService(alarmIntent)
+
+        binding.percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display())
+
+
         binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,
