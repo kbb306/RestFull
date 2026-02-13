@@ -20,18 +20,23 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val recycler = binding.scratchpad
+        val filler = binding.filler
+        val percentbox = binding.percentbox
         //This might allow my original service code to run after all
         val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
             putExtra("alarmlist", ArrayList(viewModel.alarmList))
         }
         startService(alarmIntent)
-        binding.filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
+        filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(
                 seekBar: SeekBar?,
                 progress: Int,
                 fromUser: Boolean
             ) {
-                viewModel.percent(0,100/progress)
+                val percent = 100/(filler.max -progress)
+                viewModel.percent(0,percent)
+                percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -41,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        binding.percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
 
 
         // Spinner population
