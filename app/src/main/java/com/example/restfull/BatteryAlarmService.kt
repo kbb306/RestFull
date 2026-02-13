@@ -16,6 +16,7 @@ import com.example.restfullsimple.BatteryListener
 
 class BatteryAlarmService(context: Context): Service() {
     private val battman = BatteryListener(this)
+    private var loop = true
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
@@ -48,14 +49,27 @@ class BatteryAlarmService(context: Context): Service() {
         }
         val alarmList = mutableListOf(intent?.getParcelableArrayListExtra<Alarm>("alarmlist"))
         val alarmlist = alarmList[0]
-        // Logic here?
+        while(loop) { // TODO: This is dumb. Find a way to do without loops
+            if (alarmlist != null) {
+                for (alarm in alarmlist) {
+                    when {
+                        alarm.on -> {
+                            if (battman.per == alarm.threshold) {
+                                Log.d("Alarm ${alarm.name}", "sounding!",)
+                            }
+                        }
+                        else -> continue
+                    }
+                }
+            }
+        }
         stopSelf()
         return START_STICKY
     }
 
     override fun stopService(name: Intent?): Boolean {
         Log.d("Stopping","Stopping Service")
-
+        loop = false
         return super.stopService(name)
     }
 
