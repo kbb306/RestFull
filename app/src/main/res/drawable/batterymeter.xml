@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/battbackground">
+        <bitmap
+            android:gravity="center"
+            android:src="batteryempty" />
+    </item>
+
+    <item android:id="@+id/battforeground">
+        <clip>
+            <bitmap
+                android:gravity="left"
+                android:src="batteryfull" />
+        </clip>
+    </item>
+</layer-list>
