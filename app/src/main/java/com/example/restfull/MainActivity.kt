@@ -19,7 +19,6 @@ import kotlin.toString
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel : RestFullViewModel by viewModels()
-    private val batt = BatteryListener(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         val recycler = binding.scratchpad
         val filler = binding.filler
         val percentbox = binding.percentbox
+        percentbox.setText(viewModel.getPer(0).toString())
+        filler.progress = viewModel.getPer(0)/20
         //This might allow my original service code to run after all
         val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
             putExtra("alarmlist", ArrayList(viewModel.alarmList))
@@ -120,5 +121,6 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+
     }
 }

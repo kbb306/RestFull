@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat
 import com.example.restfullsimple.BatteryListener
 
 class BatteryAlarmService(context: Context): Service() {
-    private val battman = BatteryListener(this) // Does this need application context?
+    private val battman = BatteryListener(applicationContext) // Does this need application context?
     private var loop = true
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -28,7 +28,6 @@ class BatteryAlarmService(context: Context): Service() {
     fun buildNotification () {
         TODO("Build notification")
     }
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         //val notification = buildNotification(this)
         val name=intent?.getStringExtra("name")
