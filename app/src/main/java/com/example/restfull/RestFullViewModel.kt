@@ -35,9 +35,8 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
         alarmList[pos].volume = vol
     }
 
-    fun display (pos: Int) : String {
-        val string : String = alarmList[pos].threshold.toString()
-        return string
+    fun getPer(pos: Int): Int {
+        return alarmList[pos].threshold
     }
 
     fun setRepeat() {

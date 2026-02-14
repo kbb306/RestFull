@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import android.text.Editable
 import android.text.TextWatcher
 import com.example.restfullsimple.BatteryListener
+import kotlin.toString
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,10 +40,17 @@ class MainActivity : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                val percent = progress * 20
-                viewModel.percent(0,percent)
-                percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
+                if(fromUser){
+                    val percent = progress * 20
+                    viewModel.percent(0,percent)
+                }
+
+                val newText = viewModel.getPer(0).toString()
+                if (percentbox.text.toString() != newText) {
+                    percentbox.setText(newText)
+                }
                 val color = when {
+                    progress == 0 -> Color.GRAY
                     progress <= 1 -> Color.RED
                     progress <= 2 -> Color.YELLOW
                     else -> Color.GREEN
@@ -51,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                 fore.setTint(color)
 
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
@@ -62,13 +69,17 @@ class MainActivity : AppCompatActivity() {
 
         percentbox.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().toInt()
+                val instring = s.toString()
+                if (instring.isEmpty()) {return}
+                val input = instring.toIntOrNull() ?: -1
                 val num = when {
                     input <= 100 -> input
                     else -> 100
                 }
-                viewModel.percent(0,num)
-
+                if (num != viewModel.getPer(0)) {
+                    viewModel.percent(0,num)
+                    filler.progress = num / 20
+                }
             }
 
             override fun beforeTextChanged(
@@ -89,13 +100,10 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-
-
-
-        // Spinner population
-            val titles = viewModel.genTitles()
-            val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
-            binding.soundspinner.adapter = adapter
+// Spinner population
+    val titles = viewModel.genTitles()
+    val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
+    binding.soundspinner.adapter = adapter
 
 // Spinner binding
         binding.soundspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
