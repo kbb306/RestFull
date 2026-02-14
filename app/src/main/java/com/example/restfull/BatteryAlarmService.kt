@@ -39,7 +39,7 @@ class BatteryAlarmService(context: Context): Service() {
             Log.d("Service Name",name)
         }
         Log.d("Service Status","Starting Service")
-        if (!battman.isCharging) {
+        if (!battman.isCharging()) {
             Toast.makeText(
                 applicationContext, "Cannot be used while battery is not charging",
                 Toast.LENGTH_LONG
@@ -53,7 +53,7 @@ class BatteryAlarmService(context: Context): Service() {
                 for (alarm in alarmlist) {
                     when {
                         alarm.on -> {
-                            if (battman.per == alarm.threshold) {
+                            if (battman.percent() == alarm.threshold) {
                                 Log.d("Alarm ${alarm.name}", "sounding!",)
                             }
                         }

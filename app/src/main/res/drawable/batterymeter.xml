@@ -7,10 +7,12 @@
     </item>
 
     <item android:id="@+id/battforeground">
-        <clip>
+        <clip
+            android:clipOrientation="horizontal"
+            android:gravity="left">
             <bitmap
-                android:gravity="left"
-                android:src="batteryfull" />
+                android:src="batteryfull"
+                android:gravity="center"/>
         </clip>
     </item>
 </layer-list>
