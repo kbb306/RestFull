@@ -11,7 +11,7 @@ import android.widget.SeekBar
 import com.example.restfull.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import android.text.Editable
-
+import android.text.TextWatcher
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +57,36 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
+
+        percentbox.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString().toInt()
+                val num = when {
+                    input <= 100 -> input
+                    else -> 100
+                }
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+        })
+
+
         // Spinner population
             val titles = viewModel.genTitles()
             val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
