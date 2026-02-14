@@ -34,11 +34,7 @@ class MainActivity : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                val percent = when{
-                    progress <= 0 -> 0
-                    progress >= filler.max -> 100/1
-                    else -> 100/(filler.max -progress)
-                        }
+                val percent = progress * 20
                 viewModel.percent(0,percent)
                 percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
                 val color = when {
@@ -65,6 +61,8 @@ class MainActivity : AppCompatActivity() {
                     input <= 100 -> input
                     else -> 100
                 }
+                viewModel.percent(0,num)
+
 
             }
 
