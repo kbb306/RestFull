@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private val BOX_KEY = "PERCENT"
     private val SEEK_KEY = "SEEK"
-    private val RESULT_KEY = "RESULT"
     private lateinit var binding: ActivityMainBinding
     private val viewModel: RestFullViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
