@@ -30,7 +30,7 @@ class BatteryListener(private val context: Context) {
 
     fun fullOrNull() : Long? {
         val battMan = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-        val fullTime: Long = battMan.computeChargeTimeRemaining() // May not autoupdate
+        val fullTime: Long = battMan.computeChargeTimeRemaining()
         return when {
             fullTime > 0 -> fullTime
             else -> null
