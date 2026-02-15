@@ -24,7 +24,7 @@ class BatteryListener(private val context: Context) {
         val scale: Int = batteryStatus()?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
         return when {
             level == -1 || scale == -1 -> null
-            else -> level / scale * 100
+            else -> (level * 100) / scale
         }
     }
 
