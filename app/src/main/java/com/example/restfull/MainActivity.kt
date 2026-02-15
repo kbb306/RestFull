@@ -12,40 +12,62 @@ import com.example.restfull.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import android.text.Editable
 import android.text.TextWatcher
+import kotlin.collections.get
+import kotlin.toString
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val BOX_KEY = "PERCENT"
+    private val SEEK_KEY = "SEEK"
+    private val RESULT_KEY = "RESULT"
     private lateinit var binding: ActivityMainBinding
-    private val viewModel : RestFullViewModel by viewModels()
+    private val viewModel: RestFullViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val recycler = binding.scratchpad
-        val filler = binding.filler
         val percentbox = binding.percentbox
+        val filler = binding.filler
+        val fore = ((filler.progressDrawable ?: return) as LayerDrawable).findDrawableByLayerId(
+            android.R.id.progress
+        )
+        fore.setTint(Color.GREEN)
 
+        percentbox.setText(viewModel.getPer(0).toString())
+        filler.progress = viewModel.getPer(0) / 20
 
+        savedInstanceState?.let {
+            percentbox.setText(savedInstanceState.getInt(BOX_KEY).toString())
+            filler.progress = savedInstanceState.getInt(SEEK_KEY)
+        }
 
-        filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
+        filler.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
                 seekBar: SeekBar?,
                 progress: Int,
                 fromUser: Boolean
             ) {
-                val percent = progress * 20
-                viewModel.percent(0,percent)
-                percentbox.text = Editable.Factory.getInstance().newEditable(viewModel.display(0))
+                if (fromUser) {
+                    val percent = progress * 20
+                    viewModel.percent(0, percent)
+                }
+
+                val newText = viewModel.getPer(0).toString()
+                if (percentbox.text.toString() != newText) {
+                    percentbox.setText(newText)
+                }
                 val color = when {
+                    progress == 0 -> Color.GRAY
                     progress <= 1 -> Color.RED
                     progress <= 2 -> Color.YELLOW
                     else -> Color.GREEN
                 }
-                val fore = ((seekBar?.progressDrawable ?: return  ) as LayerDrawable).findDrawableByLayerId(android.R.id.progress)
                 fore.setTint(color)
 
             }
+
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
@@ -56,14 +78,19 @@ class MainActivity : AppCompatActivity() {
 
         percentbox.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString().toInt()
+                val instring = s.toString()
+                if (instring.isEmpty()) {
+                    return
+                }
+                val input = instring.toIntOrNull() ?: 0
                 val num = when {
                     input <= 100 -> input
                     else -> 100
                 }
-                viewModel.percent(0,num)
-
-
+                if (num != viewModel.getPer(0)) {
+                    viewModel.percent(0, num)
+                    filler.progress = num / 20
+                }
             }
 
             override fun beforeTextChanged(
@@ -86,11 +113,11 @@ class MainActivity : AppCompatActivity() {
 
 
         // Spinner population
-            val titles = viewModel.genTitles()
-            val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
-            binding.soundspinner.adapter = adapter
+        val titles = viewModel.genTitles()
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, titles)
+        binding.soundspinner.adapter = adapter
 
-// Spinner binding
+        // Spinner binding
         binding.soundspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -104,6 +131,15 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
         }
     }
-}
+
+        override fun onSaveInstanceState(outState: Bundle) {
+            super.onSaveInstanceState(outState)
+            outState.putInt(BOX_KEY, viewModel.getPer(0))
+            outState.putInt(SEEK_KEY, viewModel.getPer(0) / 20)
+        }
+
+
+    }

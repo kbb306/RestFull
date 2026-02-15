@@ -9,7 +9,7 @@ class Adapter(private val alarmList: List<Alarm>) :
     RecyclerView.Adapter<Adapter.Viewholder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.alarm_card, parent,false)
-        return Viewholder(view)
+    return Viewholder(view)
         }
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {

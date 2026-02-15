@@ -6,11 +6,11 @@ import android.icu.util.Calendar
 import android.provider.AlarmClock
 
 class AlarmSpawner(val context: Context) {
-    fun spawn(alarm : Alarm, per : Int, fullTime : Long) {
+    fun spawn(alarm : Alarm, time : Long) {
         val cal = Calendar.getInstance()
-        val timeToTarget = (alarm.threshold.minus(per).div((1-per)).times(fullTime)).toInt()
+        val timeToTarget = time/60000
 
-        cal.add(Calendar.MINUTE, timeToTarget)
+        cal.add(Calendar.MINUTE, timeToTarget.toInt())
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                     putExtra(AlarmClock.EXTRA_HOUR, cal.get(Calendar.HOUR_OF_DAY))
                     putExtra(AlarmClock.EXTRA_MINUTES, cal.get(Calendar.MINUTE))

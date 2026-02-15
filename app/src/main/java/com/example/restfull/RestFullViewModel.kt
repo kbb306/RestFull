@@ -46,6 +46,9 @@ class RestFullViewModel(application: Application) : AndroidViewModel(application
         val toRedo = Intent()
     }
 
+    fun getPer(pos:Int) : Int {
+        return alarmList[pos].threshold
+    }
 
 
 
