@@ -13,29 +13,39 @@ import androidx.activity.viewModels
 import android.text.Editable
 import android.text.TextWatcher
 import com.example.restfullsimple.BatteryListener
+import kotlin.collections.get
+import kotlin.div
 import kotlin.toString
 
 
 class MainActivity : AppCompatActivity() {
+    private val BOX_KEY = "PERCENT"
+    private val SEEK_KEY = "SEEK"
     private lateinit var binding: ActivityMainBinding
-    private val viewModel : RestFullViewModel by viewModels()
-
+    private val viewModel: RestFullViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val recycler = binding.scratchpad
-        val filler = binding.filler
-        val percentbox = binding.percentbox
-        percentbox.setText(viewModel.getPer(0).toString())
-        filler.progress = viewModel.getPer(0)/20
-        //This might allow my original service code to run after all
         val alarmIntent = Intent(this, BatteryAlarmService::class.java).apply {
-            putExtra("alarmlist", ArrayList(viewModel.alarmList))
+            putExtra("alarmlist", ArrayList(viewModel.alarmList)) // This will not be updated, will it?
         }
         startService(alarmIntent)
-        filler.setOnSeekBarChangeListener(object  : SeekBar.OnSeekBarChangeListener{
+        val percentbox = binding.percentbox
+        val filler = binding.filler
+        val fore = ((filler.progressDrawable ?: return  ) as LayerDrawable).findDrawableByLayerId(android.R.id.progress)
+        fore.setTint(Color.GREEN)
+
+        percentbox.setText(viewModel.getPer(0).toString())
+        filler.progress = viewModel.getPer(0)/20
+
+        savedInstanceState?.let {
+            percentbox.setText(savedInstanceState.getInt(BOX_KEY).toString())
+            filler.progress = savedInstanceState.getInt(SEEK_KEY)
+        }
+
+        filler.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
                 seekBar: SeekBar?,
                 progress: Int,
@@ -56,10 +66,11 @@ class MainActivity : AppCompatActivity() {
                     progress <= 2 -> Color.YELLOW
                     else -> Color.GREEN
                 }
-                val fore = ((seekBar?.progressDrawable ?: return  ) as LayerDrawable).findDrawableByLayerId(android.R.id.progress)
                 fore.setTint(color)
 
             }
+
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
@@ -67,12 +78,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         percentbox.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val instring = s.toString()
                 if (instring.isEmpty()) {return}
-                val input = instring.toIntOrNull() ?: -1
+                val input = instring.toIntOrNull() ?: 0
                 val num = when {
                     input <= 100 -> input
                     else -> 100
@@ -81,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                     viewModel.percent(0,num)
                     filler.progress = num / 20
                 }
+
             }
 
             override fun beforeTextChanged(
@@ -100,11 +111,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-// Spinner population
-    val titles = viewModel.genTitles()
-    val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
-    binding.soundspinner.adapter = adapter
+        // Spinner population
+        val titles = viewModel.genTitles()
+        val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item, titles)
+        binding.soundspinner.adapter = adapter
 
 // Spinner binding
         binding.soundspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -123,4 +133,13 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(BOX_KEY,viewModel.getPer(0))
+        outState.putInt(SEEK_KEY,viewModel.getPer(0)/20)
+    }
+
+
 }
+
