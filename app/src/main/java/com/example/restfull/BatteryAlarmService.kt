@@ -16,6 +16,7 @@ import com.example.restfullsimple.BatteryListener
 
 class BatteryAlarmService(context: Context): Service() {
     private val battman = BatteryListener(applicationContext) // Does this need application context?
+    private val channelId = "restfull_service"
     private var loop = true
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -25,8 +26,9 @@ class BatteryAlarmService(context: Context): Service() {
         super.onCreate()
     }
 
-    fun buildNotification () {
-        TODO("Build notification")
+   private fun buildNotification () {
+       NotificationCompat.Builder(this,channelId)
+
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         //val notification = buildNotification(this)
