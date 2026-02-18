@@ -1,17 +1,15 @@
 package com.example.restfull
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.Service
 import android.content.Intent
-import android.os.Build
 import android.os.IBinder
 import android.app.NotificationManager
 import android.content.Context
-import android.os.BatteryManager
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.restfullsimple.BatteryListener
 
@@ -21,7 +19,7 @@ class BatteryAlarmService(context: Context): Service() {
     private val notificationId = 3942
     private var loop = false
 
-    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
 
     private  var alarmList : ArrayList<Alarm>? = null
     private val tick = object : Runnable {
@@ -60,7 +58,7 @@ class BatteryAlarmService(context: Context): Service() {
 
 
     private fun createChannel() {
-        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val nm = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val channel = NotificationChannel(
             channelId,
             "RestFull",
@@ -83,7 +81,7 @@ class BatteryAlarmService(context: Context): Service() {
     }
 
     private fun update(alarm : String) {
-        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val nm = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         nm.notify(notificationId,buildNotification("Alarm $alarm sounding!"))
     }
 

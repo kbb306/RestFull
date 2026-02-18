@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestFull">
         <service
-            android:name=".service.BatteryAlarmService"
+            android:name=".BatteryAlarmService"
             android:foregroundServiceType="mediaPlayback"
             android:exported="false" />
 
